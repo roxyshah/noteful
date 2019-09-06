@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+/* CARD STYLES */
+  
+.Card {
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 1px 0 rgba(9,45,66,.25);
+    padding: 8px;
+    color: #17394d;
+  }
+  
+  .Card {
+    margin-bottom: 10px;
+  }
+  
+  .Card h3 {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  
+  .Card p {
+    margin: 0;
+    font-size: 12px;
+  }
+  
+  .Card button {
+    float: right;
+    background-color: #eff1f3;
+    border-radius: 6px;
+  }

@@ -11,9 +11,10 @@ class App extends Component {
   };
 
   render() {
+    const Cards = STORE.notes.map(note => <Card name={note.name} modified={note.modified} />);
     return (
       <main className='App'>
-        <Card name="name" modified="3rd Jan 2019" />
+        {Cards}
       </main>
     );
   }

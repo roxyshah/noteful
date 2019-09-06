@@ -7,7 +7,7 @@ export default function Card(props) {
             <button
                 type='button'
                 onClick={() => props.onClickDelete(props.id)}
-            >delete</button>
+            >delete note</button>
 
             <h3>{props.name}</h3>
             <p>{props.modified}</p>
