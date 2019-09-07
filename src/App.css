@@ -15,7 +15,7 @@ body {
     background: #0079bf;
     padding: 8px;
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
   }
   
   .App-header h1 {

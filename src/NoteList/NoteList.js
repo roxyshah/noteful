@@ -8,9 +8,7 @@ export default function NoteList(props){
     
     return (
         <section className='NoteList'>
-            <header className='NoteList-header'><h2>{props.header}</h2></header>
-            <div className='NoteList-notes'></div>
-              {notes} 
+            {notes} 
         </section>
     )
 }

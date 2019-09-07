@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import STORE from './dummy-store';
 import './App.css'
 import NoteList from './NoteList/NoteList';
+import FolderList from './FolderList/FolderList';
 
 
 class App extends Component {
@@ -13,7 +14,8 @@ class App extends Component {
   render() {
     return (
       <main className='App'>
-        <NoteList notes = {STORE.notes} />;
+        <NoteList notes = {STORE.notes} />
+        <FolderList folders = {STORE.folders} />
       </main>
     );
   }
