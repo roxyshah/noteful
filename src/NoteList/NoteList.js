@@ -9,6 +9,12 @@ export default function NoteList(props){
     return (
         <section className='NoteList'>
             {notes} 
+
+            <button 
+            type='button' 
+            className='List-add-button'
+            onClick={() => props.onClickAdd(props.id)}
+            >+ Add Note</button>
         </section>
     )
 }
