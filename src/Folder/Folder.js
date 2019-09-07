@@ -1,11 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Folder.css';
+
 
 export default function Folder(props) {
     return (
-        <div className='Folder'>
-            <h3>{props.name}</h3>
-            Click folder here to navigate to the Notes within Folder
-        </div>   
+            <Link to={'/folder/' + props.id} >
+                <div className='Folder'>
+                    <h3>{props.name}</h3>
+                </div> 
+            </Link> 
+ 
     )
 }

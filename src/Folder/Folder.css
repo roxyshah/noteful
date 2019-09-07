@@ -38,3 +38,8 @@ body {
     background-color: #eff1f3;
     border-radius: 6px;
   }
+
+  .Folder-Link {
+    display: block;
+    width: 100%;
+  }

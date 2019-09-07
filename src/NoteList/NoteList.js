@@ -4,11 +4,13 @@ import Note from '../Note/Note';
 
 export default function NoteList(props){
     
-    const notes = props.notes.map(note => <Note name={note.name} modified={note.modified} />);
+    const notes = props.notes
+        .filter(note => props.folderId ? note.folderId === props.folderId : true)
+        .map(note => <Note name={note.name} modified={note.modified} id={note.id} />);
     
     return (
         <section className='NoteList'>
-            {notes} 
+            {notes}
 
             <button 
             type='button' 
