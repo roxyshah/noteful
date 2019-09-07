@@ -8,9 +8,9 @@ body {
     -moz-osx-font-smoothing: grayscale;
   }
 
-/* CARD STYLES */
+/* Note STYLES */
   
-.Card {
+.Note {
     border-radius: 4px;
     background-color: #fff;
     box-shadow: 0 1px 0 rgba(9,45,66,.25);
@@ -18,21 +18,21 @@ body {
     color: #17394d;
   }
   
-  .Card {
+  .Note {
     margin-bottom: 10px;
   }
   
-  .Card h3 {
+  .Note h3 {
     font-size: 14px;
     margin-bottom: 4px;
   }
   
-  .Card p {
+  .Note p {
     margin: 0;
     font-size: 12px;
   }
   
-  .Card button {
+  .Note button {
     float: right;
     background-color: #eff1f3;
     border-radius: 6px;

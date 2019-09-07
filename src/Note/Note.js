@@ -1,9 +1,9 @@
 import React from 'react';
-import './Card.css';
+import './Note.css';
 
-export default function Card(props) {
+export default function Note(props) {
     return (
-        <div className='Card'>
+        <div className='Note'>
             <button
                 type='button'
                 onClick={() => props.onClickDelete(props.id)}
@@ -15,6 +15,6 @@ export default function Card(props) {
     )
 }
 
-Card.propTypes = {
+Note.propTypes = {
     onClickDelete: () => {}
 }

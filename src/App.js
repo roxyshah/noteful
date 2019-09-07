@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import STORE from './dummy-store';
-
-import Card from './Card/Card';
+import './App.css'
+import NoteList from './NoteList/NoteList';
 
 
 class App extends Component {
@@ -11,10 +11,9 @@ class App extends Component {
   };
 
   render() {
-    const Cards = STORE.notes.map(note => <Card name={note.name} modified={note.modified} />);
     return (
       <main className='App'>
-        {Cards}
+        <NoteList notes = {STORE.notes} />;
       </main>
     );
   }
