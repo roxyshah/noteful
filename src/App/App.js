@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import STORE from './dummy-store';
+import STORE from '../dummy-store';
 import './App.css'
 
 import { Route } from 'react-router-dom';
-import Header from './Header/Header'
-import NoteList from './NoteList/NoteList';
-import FolderList from './FolderList/FolderList';
-import NoteContent from './NoteContent/NoteContent';
+import Header from '../Header/Header'
+import NoteList from '../NoteList/NoteList';
+import FolderList from '../FolderList/FolderList';
+import NoteContent from '../NoteContent/NoteContent';
 
 
 class App extends Component {
@@ -36,6 +36,13 @@ class App extends Component {
             render= {(props) => {
               return <div>
                   <Header />
+                  <button 
+                    type='button' 
+                    className='back-button'
+                    onClick={() => props.history.goBack()}
+                    >Back
+                  </button>
+
                   <div className='App-content'>
                     <NoteList notes={STORE.notes} folderId={props.match.params.folderId}/>
                     <FolderList folders = {STORE.folders} />
@@ -49,6 +56,12 @@ class App extends Component {
             render= {(props) => {
               return <div>
                   <Header />
+                  <button 
+                    type='button' 
+                    className='back-button'
+                    onClick={() => props.history.goBack()}
+                    >Back
+                  </button>
                   <div className='App-content'>
                     <NoteList notes={STORE.notes} folderId={props.match.params.folderId}/>
                     <FolderList folders = {STORE.folders} />
