@@ -5,17 +5,20 @@ import './Note.css';
 
 export default function Note(props) {
     return (
-        <Link to={'/note/' + props.id}>
-            <div className='Note'>
-                <button
-                    type='button'
-                    onClick={() => props.onClickDelete(props.id)}
-                >delete note</button>
-
-                <h3>{props.name}</h3>
-                <p>{format(props.modified, "Do MMM YYYY")}</p>
-            </div>
-        </Link>   
+        <div className='Note'>
+            <Link to={'/note/' + props.id}>
+                    <h3>{props.name}</h3>
+                    <p>{format(props.modified, "Do MMM YYYY")}</p>
+            </Link>
+            
+            <button
+                type='button'
+                onClick={(e) => {
+                    e.stopPropagation();
+                    props.onClickDelete(props.id);
+                }}>delete note
+            </button>
+        </div>
     )
 }
 
