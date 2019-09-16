@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { format } from 'date-fns';
 import './Note.css';
 
 export default function Note(props) {
@@ -12,7 +13,7 @@ export default function Note(props) {
                 >delete note</button>
 
                 <h3>{props.name}</h3>
-                <p>{props.modified}</p>
+                <p>{format(props.modified, "Do MMM YYYY")}</p>
             </div>
         </Link>   
     )

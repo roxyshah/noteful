@@ -7,13 +7,19 @@ import Header from '../Header/Header'
 import NoteList from '../NoteList/NoteList';
 import FolderList from '../FolderList/FolderList';
 import NoteContent from '../NoteContent/NoteContent';
+import NoteForm from '../NoteForm/NoteForm';
 
 
 class App extends Component {
 
   state = {
-    store: STORE,
+    notes: [],
+    folders: []
   };
+
+  componentDidMount() {
+    setTimeout(() => this.setState(STORE), 200);
+  }
 
   render() {
     return (
@@ -24,9 +30,9 @@ class App extends Component {
               return <div>
                   <Header />
                   <div className='App-content'>
-                    <NoteList notes={STORE.notes} />
-                    <FolderList folders = {STORE.folders} />
-                  </div>    
+                    <NoteList notes={this.state.notes} />
+                    <FolderList folders = {this.state.folders} />
+                  </div>
                 </div>
             }}
           />
@@ -43,10 +49,15 @@ class App extends Component {
                     >Back
                   </button>
 
+                  {/* we're using this.state on the onClickAdd button, because it's something that's going to change over time */}
                   <div className='App-content'>
-                    <NoteList notes={STORE.notes} folderId={props.match.params.folderId}/>
-                    <FolderList folders = {STORE.folders} />
-                  </div>    
+                    <NoteList 
+                      notes={this.state.notes} 
+                      folderId={props.match.params.folderId} 
+                      onClickAdd={() => {}}
+                      onClickDelete={() => {}}/>
+                    <FolderList folders = {this.state.folders} />
+                  </div> 
                 </div>
             }}
           />
@@ -63,9 +74,9 @@ class App extends Component {
                     >Back
                   </button>
                   <div className='App-content'>
-                    <NoteList notes={STORE.notes} folderId={props.match.params.folderId}/>
-                    <FolderList folders = {STORE.folders} />
-                    <NoteContent content={STORE.notes.find(note => props.match.params.noteId === note.id).content} />
+                    <NoteList notes={this.state.notes} folderId={props.match.params.folderId}/>
+                    <FolderList folders = {this.state.folders} />
+                    <NoteContent content={this.state.notes.find(note => props.match.params.noteId === note.id).content} />
                   </div>    
                 </div>
             }}
