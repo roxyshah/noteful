@@ -4,22 +4,33 @@
 import React from 'react';
 import './NoteList.css'
 import Note from '../Note/Note';
+import ApiContext from '../ApiContext';
 
-export default function NoteList(props){
-    
-    const notes = props.notes
-        .filter(note => props.folderId ? note.folderId === props.folderId : true)
-        .map(note => <Note name={note.name} modified={note.modified} id={note.id} onClickDelete={props.onClickDelete}/>);
-    
-    return (
-        <section className='NoteList'>
-            {notes}
+export default class NoteList extends React.Component{
 
-            <button 
-            type='button' 
-            className='List-add-button'
-            onClick={() => props.onClickAdd()}
-            >+ Add Note</button>
-        </section>
-    )
+    static contextType = ApiContext;
+    
+    render() {
+        const notes = this.context.notes
+            .filter(note => this.props.folderId ? note.folderId === this.props.folderId : true)
+            .map(note => <Note 
+                name={note.name} 
+                modified={note.modified} 
+                id={note.id} 
+                onClickDelete={this.props.onClickDelete}
+                redirectAfterDelete={this.props.redirectAfterDelete}/>);
+    
+        return (
+            <section className='NoteList'>
+                {notes}
+
+                <button 
+                type='button' 
+                className='List-add-button'
+                onClick={() => this.props.onClickAdd({name:"hello", modified: Date.now, id: "0"})}
+                >+ Add Note</button>
+            </section>
+        )
+    }
+
 }
