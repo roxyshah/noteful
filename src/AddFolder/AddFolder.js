@@ -57,23 +57,25 @@ class AddFolder extends Component {
 
     render() {
         return (
-            <form className='addFolder-form' action='#' onSubmit={this.handleSubmit}>
-                <div className='form-group'>
-                    <label htmlFor='folderName'>Folder Name</label>
-                    <input 
-                        type='text' 
-                        name='folderName' 
-                        id='folder-name' 
-                        placeholder='folder name'
-                        onChange={e => this.updateName(e.target.value)} />
-                </div>
+            <section className='AddFolder'>
+                <h2>Add a folder</h2>
+                <form className='addFolder-form' action='#' onSubmit={this.handleSubmit}>
+                    <div className='form-group'>
+                        <label htmlFor='folderName'>Folder Name: </label>
+                        <input 
+                            type='text' 
+                            name='folderName' 
+                            id='folder-name' 
+                            onChange={e => this.updateName(e.target.value)} />
+                    </div>
 
-                <div className='buttons'>
-                    <button type='submit'>
-                      Add folder
-                    </button>
-                </div>
-            </form>
+                    <div className='buttons'>
+                        <button type='submit'>
+                          + Add folder
+                        </button>
+                    </div>
+                </form>
+            </section>
         );
     }
 }

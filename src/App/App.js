@@ -9,6 +9,7 @@ import NoteContent from '../NoteContent/NoteContent';
 import apiConfig from '../apiConfigs';
 import ApiContext from '../ApiContext';
 import AddFolder from '../AddFolder/AddFolder';
+import AddNote from '../AddNote/AddNote';
 
 
 class App extends Component {
@@ -148,6 +149,16 @@ class App extends Component {
                 return <div className='wrapper'>
                   <Header />
                   <AddFolder />
+                </div>
+              }}
+            />
+
+            <Route
+              path='/addNote'
+              render= {(props) => {
+                return <div className='wrapper'>
+                  <Header />
+                  <AddNote />
                 </div>
               }}
             />

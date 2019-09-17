@@ -3,6 +3,7 @@
 
 import React from 'react';
 import './NoteList.css'
+import { NavLink } from 'react-router-dom';
 import Note from '../Note/Note';
 import ApiContext from '../ApiContext';
 
@@ -25,11 +26,13 @@ export default class NoteList extends React.Component{
             <section className='NoteList'>
                 {notes}
 
-                <button 
-                type='button' 
-                className='List-add-button'
-                onClick={() => this.props.onClickAdd({name:"hello", modified: Date.now, id: "0"})}
-                >+ Add Note</button>
+                <NavLink to={'/addNote/'} >
+                    <button 
+                        type='button' 
+                        className='List-add-button'>
+                        + Add Note
+                    </button>
+                </NavLink>
             </section>
         )
     }

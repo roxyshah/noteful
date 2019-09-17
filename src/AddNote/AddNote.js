@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ApiContext from '../ApiContext';
+import apiConfig from '../apiConfigs';
 import './AddNote.css';
 
 import ValidationError from '../ValidationError';
@@ -22,28 +24,60 @@ class AddNote extends Component {
         }
     }
 
-    updateName(name) {
+    static defaultProps = {
+        history: {
+          push: () => { }
+        },
+      }
+
+    static contextType = ApiContext;
+
+    updateNoteName(name) {
         this.setState({name: {value: name, touched: true}});
     }
 
-    updateContent(content) {
+    updateNoteContent(content) {
         this.setState({content: {value: content, touched: true}});
     }
 
-    updateFolder(folder) {
+    updateNoteFolder(folder) {
+        console.log(folder);
         this.setState({folder: {value: folder, touched: true}});
     }
 
-    handleSubmit(event) {
+    handleSubmit = event => {
         event.preventDefault();
         const { name, content, folder } = this.state;
+        const newNote = { 
+            name: name.value, 
+            content: content.value, 
+            folderId: folder.value, 
+            modified: new Date() 
+        };
 
-        console.log('Name: ', name.value);
-        console.log('content', content.value);
-        console.log('folder', folder.value);
+        console.log(newNote);
+        fetch(`${apiConfig.API_ENDPOINT}/notes`, {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(newNote),
+          })
+            .then(res => {
+              if (!res.ok)
+                return res.json().then(e => Promise.reject(e))
+              return res.json()
+            })
+            .then(note => {
+              this.context.addNote(note)
+              this.props.history.push(`/folder/${note.folderId}`)
+            })
+            .catch(error => {
+              console.error({ error })
+            })
     }
 
-    validateName(fieldValue) {
+    validateNoteName(fieldValue) {
         const name = this.state.name.value.trim();
         if (name.length === 0) {
             return "Name is required";
@@ -53,44 +87,52 @@ class AddNote extends Component {
     }
 
     render() {
-        const nameError = this.validateName();
+        const nameError = this.validateNoteName();
 
         return (
-            <form className='addNote-form' action='#' onSubmit={e => this.handleSubmit(e)}>
-                <div className='form-group'>
-                    <label htmlFor='name'>Note Name</label>
-                    <input 
-                        type='text' 
-                        name='name' 
-                        id='name' 
-                        placeholder='note name'
-                        onChange={e => this.updateName(e.target.value)} 
-                    />
-                   {this.state.name.touched && <ValidationError message={nameError} />} 
-                </div>
+            <section className='AddNote'>
+                <h2>Add a note</h2>
+                <form className='addNote-form' onSubmit={this.handleSubmit}>
+                    <div className='note-field'>
+                        <label htmlFor='note-name'>Note Name: </label>
+                        <input 
+                            type='text' 
+                            name='note-name' 
+                            id='note-name' 
+                            onChange={e => this.updateNoteName(e.target.value)} 
+                        />
+                       {this.state.name.touched && <ValidationError message={nameError} />} 
+                    </div>
 
-                <div className='form-group'>
-                    <label htmlFor='content'>Content</label>
-                    <input 
-                        type='text' 
-                        name='content' 
-                        id='content' 
-                        onChange={e => this.updateContent(e.target.value)} 
-                    />
-                   {/* {this.state.content.touched && <ValidationError message={nameError} />}  */}
-                </div>
+                    <div className='note-field'>
+                        <label htmlFor='note-content'>Content: </label>
+                        <input 
+                            type='text' 
+                            name='note-content' 
+                            id='note-content' 
+                            onChange={e => this.updateNoteContent(e.target.value)} 
+                        />
+                       {/* {this.state.content.touched && <ValidationError message={nameError} />}  */}
+                    </div>
 
-                <div className='form-group'>
-                    <label htmlFor='folder'>Folder </label>
-                    <input 
-                        type='text' 
-                        name='folder' 
-                        id='folder' 
-                        onChange={e => this.updateFolder(e.target.value)} 
-                    />
-                   {/* {this.state.folder.touched && <ValidationError message={nameError} />}  */}
-                </div>
-            </form>
+                    <div className='note-field'>
+                        <label htmlFor='note-folder'>Folder: 
+                            <select 
+                                value={this.state.folder.value} 
+                                onChange={e => this.updateNoteFolder(e.target.value)}>
+                                {this.context.folders.map(folder => <option value={folder.id} key={folder.id}>{folder.name}</option>)}
+                            </select>
+                        </label>
+                       {/* {this.state.folder.touched && <ValidationError message={nameError} />}  */}
+                    </div>
+
+                    <div className='buttons'>
+                        <button type='submit'>
+                          + Add Note
+                        </button>
+                    </div>
+                </form>
+            </section>
         );
     }
 }
