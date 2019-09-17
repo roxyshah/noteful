@@ -16,7 +16,8 @@ export default class NoteList extends React.Component{
             .map(note => <Note 
                 name={note.name} 
                 modified={note.modified} 
-                id={note.id} 
+                id={note.id}
+                key={note.id} 
                 onClickDelete={this.props.onClickDelete}
                 redirectAfterDelete={this.props.redirectAfterDelete}/>);
     

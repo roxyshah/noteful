@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import './Note.css';
-import ApiContext from '../ApiContext';
 
 export default function Note(props) {
 
@@ -23,7 +22,6 @@ export default function Note(props) {
     )
 }
 
-Note.contextType = ApiContext;
 Note.propTypes = {
     onClickDelete: () => {}
 }

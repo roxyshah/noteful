@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import STORE from '../dummy-store';
 import './App.css'
 
 import { Route } from 'react-router-dom';
@@ -7,9 +6,9 @@ import Header from '../Header/Header'
 import NoteList from '../NoteList/NoteList';
 import FolderList from '../FolderList/FolderList';
 import NoteContent from '../NoteContent/NoteContent';
-// import NoteForm from '../NoteForm/NoteForm';
 import apiConfig from '../apiConfigs';
 import ApiContext from '../ApiContext';
+import AddFolder from '../AddFolder/AddFolder';
 
 
 class App extends Component {
@@ -48,6 +47,14 @@ class App extends Component {
     });
   }
 
+  handleAddFolder = folder => {
+    const newFolderArr = this.state.folders.slice();
+    newFolderArr.push(folder);
+    this.setState({
+      folders: newFolderArr
+    });
+  }
+
   handleDeleteNote = (noteId) => {
     this.setState({
       notes: this.state.notes.filter(note => note.id !== noteId)
@@ -58,7 +65,9 @@ class App extends Component {
     const value = {
       notes: this.state.notes,
       folders: this.state.folders,
-      deleteNote: this.handleDeleteNote
+      deleteNote: this.handleDeleteNote,
+      addFolder: this.handleAddFolder,
+      addNote: this.handleAddNote
   };
 
     return (
@@ -108,7 +117,7 @@ class App extends Component {
             <Route 
               path='/note/:noteId'
               render= {(props) => {
-                return <div>
+                return <div className='wrapper'>
                     <Header />
                     <button 
                       type='button' 
@@ -132,6 +141,17 @@ class App extends Component {
                   </div>
               }}
             />
+
+            <Route
+              path='/addFolder'
+              render= {(props) => {
+                return <div className='wrapper'>
+                  <Header />
+                  <AddFolder />
+                </div>
+              }}
+            />
+            
         </main>
       </ApiContext.Provider>
     );
