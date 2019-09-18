@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../Header/Header';
 import ApiContext from '../ApiContext';
 import './AddFolder.css';
 import apiConfig from '../apiConfigs';
@@ -57,25 +58,28 @@ class AddFolder extends Component {
 
     render() {
         return (
-            <section className='AddFolder'>
-                <h2>Add a folder</h2>
-                <form className='addFolder-form' action='#' onSubmit={this.handleSubmit}>
-                    <div className='form-group'>
-                        <label htmlFor='folderName'>Folder Name: </label>
-                        <input 
-                            type='text' 
-                            name='folderName' 
-                            id='folder-name' 
-                            onChange={e => this.updateName(e.target.value)} />
-                    </div>
-
-                    <div className='buttons'>
-                        <button type='submit'>
-                          + Add folder
-                        </button>
-                    </div>
-                </form>
-            </section>
+            <>
+                <Header />
+                <section className='AddFolder'>
+                    <h2>Add a folder</h2>
+                    <form className='addFolder-form' action='#' onSubmit={this.handleSubmit}>
+                        <div className='form-group'>
+                            <label htmlFor='folderName'>Folder Name: </label>
+                            <input 
+                                type='text' 
+                                name='folderName' 
+                                id='folder-name' 
+                                onChange={e => this.updateName(e.target.value)} />
+                        </div>
+            
+                        <div className='buttons'>
+                            <button type='submit'>
+                              + Add folder
+                            </button>
+                        </div>
+                    </form>
+                </section>
+            </>
         );
     }
 }

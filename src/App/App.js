@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import './App.css'
 
 import { Route } from 'react-router-dom';
-import Header from '../Header/Header'
-import NoteList from '../NoteList/NoteList';
-import FolderList from '../FolderList/FolderList';
-import NoteContent from '../NoteContent/NoteContent';
 import apiConfig from '../apiConfigs';
 import ApiContext from '../ApiContext';
 import AddFolder from '../AddFolder/AddFolder';
 import AddNote from '../AddNote/AddNote';
-
+import MainNav from '../MainNav/MainNav';
+import MainNoteNav from '../MainNoteNav/MainNoteNav';
 
 class App extends Component {
 
@@ -69,100 +66,35 @@ class App extends Component {
       deleteNote: this.handleDeleteNote,
       addFolder: this.handleAddFolder,
       addNote: this.handleAddNote
-  };
+    };
 
     return (
       <ApiContext.Provider value={value}>
         <main className='App'>
             <Route
               exact path='/'
-              render= {() => {
-                return <div>
-                    <Header />
-                    <div className='App-content'>
-                      <NoteList 
-                        onClickAdd={this.handleAddNote} 
-                        onClickDelete={this.handleDeleteNote}
-                        redirectAfterDelete={''} />
-                      <FolderList folders = {this.state.folders} />
-                    </div>
-                  </div>
-              }}
+              component={MainNav}
             />
 
             <Route 
               path='/folder/:folderId'
-              render= {(props) => {
-                return <div>
-                    <Header />
-                    <button 
-                      type='button' 
-                      className='back-button'
-                      onClick={() => props.history.goBack()}
-                      >Back
-                    </button>
-
-                    {/* we're using this.state on the onClickAdd button, because it's something that's going to change over time */}
-                    <div className='App-content'>
-                      <NoteList 
-                        folderId={props.match.params.folderId} 
-                        onClickAdd={this.handleAddNote}
-                        onClickDelete={this.handleDeleteNote}
-                        redirectAfterDelete={''}/>
-                      <FolderList folders = {this.state.folders} />
-                    </div> 
-                  </div>
-              }}
+              component={MainNav}
             />
 
             <Route 
               path='/note/:noteId'
-              render= {(props) => {
-                return <div className='wrapper'>
-                    <Header />
-                    <button 
-                      type='button' 
-                      className='back-button'
-                      onClick={() => props.history.goBack()}
-                      >Back
-                    </button>
-                    <div className='App-content'>
-                      <NoteList 
-                        folderId={props.match.params.folderId}
-                        onClickAdd={this.handleAddNote}
-                        onClickDelete={(noteId) => {
-                          props.history.push('/');
-                          this.handleDeleteNote(noteId);
-                        }}
-                        redirectAfterDelete={'/'}/>
-
-                      <FolderList folders = {this.state.folders} />
-                      <NoteContent content={this.state.notes.find(note => props.match.params.noteId === note.id).content} />
-                    </div>    
-                  </div>
-              }}
+              component={MainNoteNav}
             />
 
             <Route
               path='/addFolder'
-              render= {(props) => {
-                return <div className='wrapper'>
-                  <Header />
-                  <AddFolder />
-                </div>
-              }}
+              component={AddFolder}
             />
 
             <Route
               path='/addNote'
-              render= {(props) => {
-                return <div className='wrapper'>
-                  <Header />
-                  <AddNote />
-                </div>
-              }}
+              component={AddNote}
             />
-            
         </main>
       </ApiContext.Provider>
     );

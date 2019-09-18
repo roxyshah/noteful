@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../Header/Header';
 import ApiContext from '../ApiContext';
 import apiConfig from '../apiConfigs';
 import './AddNote.css';
@@ -46,6 +47,7 @@ class AddNote extends Component {
     }
 
     handleSubmit = event => {
+        debugger
         event.preventDefault();
         const { name, content, folder } = this.state;
         const newNote = { 
@@ -69,6 +71,8 @@ class AddNote extends Component {
               return res.json()
             })
             .then(note => {
+            // debugger
+            console.log("test");
               this.context.addNote(note)
               this.props.history.push(`/folder/${note.folderId}`)
             })
@@ -90,49 +94,52 @@ class AddNote extends Component {
         const nameError = this.validateNoteName();
 
         return (
-            <section className='AddNote'>
-                <h2>Add a note</h2>
-                <form className='addNote-form' onSubmit={this.handleSubmit}>
-                    <div className='note-field'>
-                        <label htmlFor='note-name'>Note Name: </label>
-                        <input 
-                            type='text' 
-                            name='note-name' 
-                            id='note-name' 
-                            onChange={e => this.updateNoteName(e.target.value)} 
-                        />
-                       {this.state.name.touched && <ValidationError message={nameError} />} 
-                    </div>
-
-                    <div className='note-field'>
-                        <label htmlFor='note-content'>Content: </label>
-                        <input 
-                            type='text' 
-                            name='note-content' 
-                            id='note-content' 
-                            onChange={e => this.updateNoteContent(e.target.value)} 
-                        />
-                       {/* {this.state.content.touched && <ValidationError message={nameError} />}  */}
-                    </div>
-
-                    <div className='note-field'>
-                        <label htmlFor='note-folder'>Folder: 
-                            <select 
-                                value={this.state.folder.value} 
-                                onChange={e => this.updateNoteFolder(e.target.value)}>
-                                {this.context.folders.map(folder => <option value={folder.id} key={folder.id}>{folder.name}</option>)}
-                            </select>
-                        </label>
-                       {/* {this.state.folder.touched && <ValidationError message={nameError} />}  */}
-                    </div>
-
-                    <div className='buttons'>
-                        <button type='submit'>
-                          + Add Note
-                        </button>
-                    </div>
-                </form>
-            </section>
+            <>
+                <Header />
+                <section className='AddNote'>
+                    <h2>Add a note</h2>
+                    <form className='addNote-form' onSubmit={this.handleSubmit}>
+                        <div className='note-field'>
+                            <label htmlFor='note-name'>Note Name: </label>
+                            <input 
+                                type='text' 
+                                name='note-name' 
+                                id='note-name' 
+                                onChange={e => this.updateNoteName(e.target.value)} 
+                            />
+                           {this.state.name.touched && <ValidationError message={nameError} />} 
+                        </div>
+            
+                        <div className='note-field'>
+                            <label htmlFor='note-content'>Content: </label>
+                            <input 
+                                type='text' 
+                                name='note-content' 
+                                id='note-content' 
+                                onChange={e => this.updateNoteContent(e.target.value)} 
+                            />
+                           {/* {this.state.content.touched && <ValidationError message={nameError} />}  */}
+                        </div>
+            
+                        <div className='note-field'>
+                            <label htmlFor='note-folder'>Folder: 
+                                <select 
+                                    value={this.state.folder.value} 
+                                    onChange={e => this.updateNoteFolder(e.target.value)}>
+                                    {this.context.folders.map(folder => <option value={folder.id} key={folder.id}>{folder.name}</option>)}
+                                </select>
+                            </label>
+                           {/* {this.state.folder.touched && <ValidationError message={nameError} />}  */}
+                        </div>
+            
+                        <div className='buttons'>
+                            <button type='submit'>
+                              + Add Note
+                            </button>
+                        </div>
+                    </form>
+                </section>
+            </>
         );
     }
 }
