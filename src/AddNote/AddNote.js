@@ -47,7 +47,6 @@ class AddNote extends Component {
     }
 
     handleSubmit = event => {
-        debugger
         event.preventDefault();
         const { name, content, folder } = this.state;
         const newNote = { 
@@ -71,7 +70,6 @@ class AddNote extends Component {
               return res.json()
             })
             .then(note => {
-            // debugger
             console.log("test");
               this.context.addNote(note)
               this.props.history.push(`/folder/${note.folderId}`)
@@ -109,7 +107,7 @@ class AddNote extends Component {
                             />
                            {this.state.name.touched && <ValidationError message={nameError} />} 
                         </div>
-            
+
                         <div className='note-field'>
                             <label htmlFor='note-content'>Content: </label>
                             <input 
@@ -120,7 +118,7 @@ class AddNote extends Component {
                             />
                            {/* {this.state.content.touched && <ValidationError message={nameError} />}  */}
                         </div>
-            
+
                         <div className='note-field'>
                             <label htmlFor='note-folder'>Folder: 
                                 <select 
@@ -131,7 +129,7 @@ class AddNote extends Component {
                             </label>
                            {/* {this.state.folder.touched && <ValidationError message={nameError} />}  */}
                         </div>
-            
+
                         <div className='buttons'>
                             <button type='submit'>
                               + Add Note
