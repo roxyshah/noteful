@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import Note from '../Note/Note';
 import ApiContext from '../ApiContext';
 
-export default class NoteList extends React.Component{
+class NoteList extends React.Component{
 
     static contextType = ApiContext;
     
@@ -36,5 +36,15 @@ export default class NoteList extends React.Component{
             </section>
         )
     }
-
 }
+
+
+NoteList.propTypes = {
+    name: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    modified: PropTypes.string.isRequired,
+    folderId: PropTypes.string.isRequired,
+    onClickDelete: () => {}
+}
+
+export default NoteList;
