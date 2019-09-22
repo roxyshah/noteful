@@ -79,7 +79,7 @@ class AddNote extends Component {
             })
     }
 
-    validateNoteName(fieldValue) {
+    validateNoteName() {
         const name = this.state.name.value.trim();
         if (name.length === 0) {
             return "Name is required";
@@ -88,8 +88,16 @@ class AddNote extends Component {
         }
     }
 
+    validateNoteFolder() {
+        const folder = this.state.folder.value.trim();
+        if (folder.length === 0) {
+            return "Folder is required";
+        }
+    }
+
     render() {
         const nameError = this.validateNoteName();
+        const folderError = this.validateNoteFolder();
 
         return (
             <>
@@ -116,7 +124,6 @@ class AddNote extends Component {
                                 id='note-content' 
                                 onChange={e => this.updateNoteContent(e.target.value)} 
                             />
-                           {/* {this.state.content.touched && <ValidationError message={nameError} />}  */}
                         </div>
 
                         <div className='note-field'>
@@ -124,14 +131,24 @@ class AddNote extends Component {
                                 <select 
                                     value={this.state.folder.value} 
                                     onChange={e => this.updateNoteFolder(e.target.value)}>
+                                        <option value="" key="0">
+                                            ---
+                                        </option>
                                     {this.context.folders.map(folder => <option value={folder.id} key={folder.id}>{folder.name}</option>)}
                                 </select>
                             </label>
-                           {/* {this.state.folder.touched && <ValidationError message={nameError} />}  */}
+                           {this.state.folder.touched && <ValidationError message={folderError} />} 
                         </div>
 
                         <div className='buttons'>
-                            <button type='submit'>
+                            <button 
+                                type='submit'
+                                className='addNote-Submit'
+                                disabled={
+                                    nameError ||
+                                    folderError
+                                }
+                            >
                               + Add Note
                             </button>
                         </div>

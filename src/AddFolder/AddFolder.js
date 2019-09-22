@@ -4,6 +4,8 @@ import ApiContext from '../ApiContext';
 import './AddFolder.css';
 import apiConfig from '../apiConfigs';
 
+import ValidationError from '../ValidationError';
+
 class AddFolder extends Component {
 
     constructor(props) {
@@ -26,6 +28,15 @@ class AddFolder extends Component {
 
     updateName(name) {
         this.setState({name: {value: name, touched: true}});
+    }
+
+    validateFolderName() {
+      const name = this.state.name.value.trim();
+      if (name.length === 0) {
+          return "Name is required";
+      } else if (name.length < 3) {
+          return "Name must be at least 3 characters long";
+      }
     }
 
     handleSubmit = e => {
@@ -57,6 +68,8 @@ class AddFolder extends Component {
       }
 
     render() {
+      const nameError = this.validateFolderName();
+
         return (
             <>
                 <Header />
@@ -70,10 +83,16 @@ class AddFolder extends Component {
                                 name='folderName' 
                                 id='folder-name' 
                                 onChange={e => this.updateName(e.target.value)} />
+                                {this.state.name.touched && <ValidationError message={nameError} />}
                         </div>
             
                         <div className='buttons'>
-                            <button type='submit'>
+                            <button 
+                              type='submit'
+                              className='not-important'
+                              disabled={
+                                nameError
+                              }>
                               + Add folder
                             </button>
                         </div>

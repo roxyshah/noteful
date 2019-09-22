@@ -6,6 +6,7 @@ import './NoteList.css'
 import { NavLink } from 'react-router-dom';
 import Note from '../Note/Note';
 import ApiContext from '../ApiContext';
+import PropTypes from 'prop-types';
 
 class NoteList extends React.Component{
 
