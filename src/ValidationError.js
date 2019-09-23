@@ -1,10 +1,12 @@
 //defining an error boundary component
-import React from 'react';
+import React, { Fragment } from 'react';
 
 export default function ValidationError(props) {
     if(props.message) {
         return (
-            <div className='error'>{props.message}</div>
+            <Fragment className='error'>
+                {props.message}
+            </Fragment>
         );
     }
     return <></>

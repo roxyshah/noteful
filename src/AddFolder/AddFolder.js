@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
 import ApiContext from '../ApiContext';
-import './AddFolder.css';
 import apiConfig from '../apiConfigs';
+import './AddFolder.css';
 
 import ValidationError from '../ValidationError';
-import AddFolderError from './AddFolderError';
 
 class AddFolder extends Component {
 
@@ -72,34 +71,42 @@ class AddFolder extends Component {
       const nameError = this.validateFolderName();
 
         return (
-            <>
-                <Header />
-                <section className='AddFolder'>
-                    <h2>Add a folder</h2>
-                    <form className='addFolder-form' action='#' onSubmit={this.handleSubmit}>
-                        <div className='form-group'>
-                            <label htmlFor='folderName'>Folder Name: </label>
-                            <input 
-                                type='text' 
-                                name='folderName' 
-                                id='folder-name' 
-                                onChange={e => this.updateName(e.target.value)} />
-                                {this.state.name.touched && <ValidationError message={nameError} />}
+          <>
+            <Header />
+            <section className='AddFolder'>
+                <h2>Add a folder</h2>
+                <form className='addFolder-form' action='#' onSubmit={this.handleSubmit}>
+                    <div className='form-group'>
+                        <label htmlFor='folderName'>Folder Name: </label>
+                        <input 
+                          type='text' 
+                          name='folderName' 
+                          id='folder-name'
+                          aria-label='form for adding a folder'
+                          aria-required='true'
+                          aria-describedby='errAddFolder'
+                          aria-invalid='true'
+                          onChange={e => this.updateName(e.target.value)}/>
+                        <div
+                          className='errorMessage'
+                          id='errAddFolder'>Please enter a valid folder name
                         </div>
-            
-                        <div className='buttons'>
-                            <button 
-                              type='submit'
-                              className='not-important'
-                              disabled={
-                                nameError
-                              }>
-                              + Add folder
-                            </button>
-                        </div>
-                    </form>
-                </section>
-            </>
+                        {this.state.name.touched && <ValidationError message={nameError} />}
+                    </div>
+        
+                    <div className='buttons'>
+                        <button 
+                          type='submit'
+                          className='not-important'
+                          disabled={
+                            nameError
+                          }>
+                          + Add folder
+                        </button>
+                    </div>
+                </form>
+            </section>
+          </>
         );
     }
 }

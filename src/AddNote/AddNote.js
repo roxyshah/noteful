@@ -112,7 +112,16 @@ class AddNote extends Component {
                                 name='note-name' 
                                 id='note-name' 
                                 onChange={e => this.updateNoteName(e.target.value)} 
+                                aria-label='form for adding a note'
+                                aria-required='true'
+                                aria-describedby='errAddNote'
+                                aria-invalid='true'
                             />
+                            <div
+                              className='errorMessage'
+                              id='errAddNote'>
+                              Please enter a valid note name
+                            </div>
                            {this.state.name.touched && <ValidationError message={nameError} />} 
                         </div>
 
@@ -122,7 +131,9 @@ class AddNote extends Component {
                                 type='text' 
                                 name='note-content' 
                                 id='note-content' 
-                                onChange={e => this.updateNoteContent(e.target.value)} 
+                                onChange={e => this.updateNoteContent(e.target.value)}
+                                aria-label='adding note content'
+                                aria-required='true' 
                             />
                         </div>
 
