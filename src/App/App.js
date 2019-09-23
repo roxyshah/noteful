@@ -5,9 +5,11 @@ import { Route } from 'react-router-dom';
 import apiConfig from '../apiConfigs';
 import ApiContext from '../ApiContext';
 import AddFolder from '../AddFolder/AddFolder';
+import AddFolderError from '../AddFolder/AddFolderError';
 import AddNote from '../AddNote/AddNote';
 import MainNav from '../MainNav/MainNav';
 import MainNoteNav from '../MainNoteNav/MainNoteNav';
+import AppError from './AppError';
 
 class App extends Component {
 
@@ -69,34 +71,42 @@ class App extends Component {
     };
 
     return (
-      <ApiContext.Provider value={value}>
-        <main className='App'>
-            <Route
-              exact path='/'
-              component={MainNav}
-            />
-
-            <Route 
-              path='/folder/:folderId'
-              component={MainNav}
-            />
-
-            <Route 
-              path='/note/:noteId'
-              component={MainNoteNav}
-            />
-
-            <Route
-              path='/addFolder'
-              component={AddFolder}
-            />
-
-            <Route
-              path='/addNote'
-              component={AddNote}
-            />
-        </main>
-      </ApiContext.Provider>
+      <AppError>
+        <ApiContext.Provider value={value}>
+          <main className='App'>
+              <Route
+                exact path='/'
+                component={MainNav}
+              />
+  
+              <Route 
+                path='/folder/:folderId'
+                component={MainNav}
+              />
+  
+              <Route 
+                path='/note/:noteId'
+                component={MainNoteNav}
+              />
+  
+              <Route
+                path='/addFolder'
+                render={() => {
+                  return (
+                    <AddFolderError>
+                      <AddFolder />
+                    </AddFolderError>
+                  );
+                }}
+              />
+  
+              <Route
+                path='/addNote'
+                component={AddNote}
+              />
+          </main>
+        </ApiContext.Provider>
+      </AppError>
     );
   }
 } 

@@ -5,6 +5,7 @@ import './AddFolder.css';
 import apiConfig from '../apiConfigs';
 
 import ValidationError from '../ValidationError';
+import AddFolderError from './AddFolderError';
 
 class AddFolder extends Component {
 

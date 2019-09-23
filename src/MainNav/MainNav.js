@@ -13,7 +13,6 @@ class MainNav extends Component {
 
         return(
             <div>
-
                 <Header />
                 {folderId && (
                     <button 
@@ -32,7 +31,6 @@ class MainNav extends Component {
                     redirectAfterDelete={''} />
                   <FolderList folders = {this.context.folders} />
                 </div>
-
             </div>
         );
     }
