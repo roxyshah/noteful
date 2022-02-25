@@ -24,11 +24,14 @@ class MainNav extends Component {
                 )}
 
                 <div className='App-content'>
-                  <NoteList 
-                    folderId={folderId}
-                    onClickAdd={this.context.addNote} 
-                    onClickDelete={this.context.deleteNote}
-                    redirectAfterDelete={''} />
+                  {folderId ? (                  
+                    <NoteList
+                        folderId={folderId}
+                        onClickAdd={this.context.addNote} 
+                        onClickDelete={this.context.deleteNote}
+                        redirectAfterDelete={''} />
+                  ) : <div>Select a folder to see folder notes</div>}
+
                   <FolderList folders = {this.context.folders} />
                 </div>
             </div>

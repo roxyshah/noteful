@@ -18,5 +18,6 @@ export default class Folder extends Component {
 
 Folder.propTypes = {
     name: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
+    modified: PropTypes.string.isRequired,
 };
