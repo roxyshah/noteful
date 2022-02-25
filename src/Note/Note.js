@@ -28,6 +28,5 @@ Note.propTypes = {
     name: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     modified: PropTypes.string.isRequired,
-    folderId: PropTypes.string.isRequired,
     onClickDelete: () => {}
 }
