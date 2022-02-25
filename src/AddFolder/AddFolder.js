@@ -5,6 +5,7 @@ import apiConfig from '../apiConfigs';
 import './AddFolder.css';
 
 import ValidationError from '../ValidationError';
+import { withRouter } from 'react-router-dom';
 
 class AddFolder extends Component {
 
@@ -17,12 +18,6 @@ class AddFolder extends Component {
             }
         }
     }
-
-    static defaultProps = {
-        history: {
-          push: () => { }
-        },
-      }
 
     static contextType = ApiContext;
 
@@ -57,7 +52,6 @@ class AddFolder extends Component {
             return res.json()
           })
           .then(folder => {
-            console.log(folder);
             this.context.addFolder(folder)
             this.props.history.push(`/folder/${folder.id}`)
             
@@ -111,4 +105,4 @@ class AddFolder extends Component {
     }
 }
 
-export default AddFolder;
+export default withRouter(AddFolder);

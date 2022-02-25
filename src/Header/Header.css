@@ -7,10 +7,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
-.Header {
-    
-}
   
 a, a:visited, a:hover, a:active {
     color: black;
